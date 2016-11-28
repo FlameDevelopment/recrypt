@@ -1,0 +1,33 @@
+{
+    "name": "flamedevelopment/recrypt",
+    "type": "library",
+    "description": "Recrypt is a simple tool for unsecurley encrypting and decrypting strings",
+    "keywords": ["encrypt", "decrypt", "encryption", "decryption"],
+    "homepage": "http://flamedevelopment.co.uk/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Martin Brooksbank",
+            "email": "martin@flamedevelopment.co.uk",
+            "homepage": "http://flamedevelopment.co.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.5"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}
