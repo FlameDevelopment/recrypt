@@ -40,7 +40,7 @@
 
             $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
             $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
-            $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key,
+            $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, self::pad_key($key),
                 $string, MCRYPT_MODE_CBC, $iv);
             $ciphertext = $iv . $ciphertext;
             $ciphertext_base64 = base64_encode($ciphertext);
@@ -71,5 +71,30 @@
                 $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec);
 
             return $plaintext_dec;
+        }
+
+        /**
+         * Pads the key with leading zero's
+         * if it is not of length 16,24,32
+         * @param $key
+         * @return bool|string
+         */
+        public static function pad_key($key)
+        {
+            // key is too large
+            if (strlen($key) > 32) return false;
+
+            // set sizes
+            $sizes = array(16, 24, 32);
+
+            // loop through sizes and pad key
+            foreach ($sizes as $s)
+            {
+                while (strlen($key) < $s) $key = $key . "\0";
+                if (strlen($key) == $s) break; // finish if the key matches a size
+            }
+
+            // return
+            return $key;
         }
     }
