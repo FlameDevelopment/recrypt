@@ -67,7 +67,7 @@
             $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
             $iv_dec = substr($ciphertext_dec, 0, $iv_size);
             $ciphertext_dec = substr($ciphertext_dec, $iv_size);
-            $plaintext_dec = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key,
+            $plaintext_dec = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, self::pad_key($key),
                 $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec);
 
             return $plaintext_dec;
